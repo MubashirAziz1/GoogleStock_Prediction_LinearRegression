@@ -47,6 +47,14 @@ y = np.array(df['label'])
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2)
 reg = linear_model.LinearRegression()
 reg.fit(x_train, y_train)
+# Store the trained data in a seperate pickle file if you want.
+
+# with open('GS_LR.pickle','wb') as f:
+#   pickle.dump(reg, f)
+# pickle_in = open('GS_LR.pickle','rb')
+# reg = pickle.load(pickle_in)
+
+
 # First of all check the accuracy of the model of the given data. Accuracy of the given model in this test case is >95%.
 accuracy = reg.score(x_test, y_test)
 
