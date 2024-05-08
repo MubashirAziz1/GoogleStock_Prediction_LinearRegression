@@ -45,19 +45,13 @@ y = np.array(df['label'])
 
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2)
-## Picke it to store the trained data so everytime we dont train the data again
-## but reuse the trained data 
+reg = linear_model.LinearRegression()
+reg.fit(x_train, y_train)
+# First of all check the accuracy of the model of the given data. Accuracy of the given model in this test case is >95%.
+accuracy = reg.score(x_test, y_test)
 
-#reg = linear_model.LinearRegression()
-#reg.fit(x_train, y_train)
-#with open('GS_LR.pickle','wb') as f:
- #   pickle.dump(reg, f)
-pickle_in = open('GS_LR.pickle','rb')
-
-reg = pickle.load(pickle_in)
 forecast_set = reg.predict(x_lately)
 df['Forecast'] = np.nan
-
 df['o_date'] = pd.to_datetime(df['o_date'])
 df.set_index(df['o_date'], inplace=True)
 last_date = df.index[-1]
