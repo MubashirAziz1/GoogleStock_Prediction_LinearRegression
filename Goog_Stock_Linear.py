@@ -35,10 +35,13 @@ df['label'] = df[forecast_col].shift(-forecast_out)
 x_columns = ['adjClose', 'HL_PCT', 'PCT_Change', 'adjVolume']
 x = np.array(df[x_columns])
 x = preprocessing.scale(x)
-# Train the only available Features
-x = x[ : -forecast_out]
+
 # At last store the features of forecast_out days in a seperate variable to predict at the end.
 x_lately = x[-forecast_out : ]
+
+# Train the only available Features
+x = x[ : -forecast_out]
+
 df.dropna(inplace = True)
 y = np.array(df['label'])
 
